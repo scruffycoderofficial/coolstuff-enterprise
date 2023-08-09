@@ -1,0 +1,102 @@
+version: '3.8'
+
+networks:
+  tribes-app-network:
+    name: tribes-app-network
+    driver: bridge
+
+volumes:
+  mysqldata:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${HOME}/server/mysql/data'
+
+services:
+  nginx:
+    image: nginx:1.21.6-alpine
+    container_name: tribes-nginx
+    restart: unless-stopped
+    ports:
+      - "9001:80"
+    volumes:
+      - ./src:/var/www
+      - .docker/nginx:/etc/nginx/conf.d
+    networks:
+      tribes-app-network:
+        aliases:
+          - nginx
+
+  app:
+    build:
+      context: .docker/php
+      dockerfile: dockerfile
+    container_name: tribes-app
+    volumes:
+      - ./src:/var/www
+      - .docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      tribes-app-network:
+        aliases:
+          - app
+
+  mysql:
+    image: mysql:8.0
+    container_name: tribes-rdbms
+    environment:
+      MYSQL_ROOT_PASSWORD: '$${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '$${DB_DATABASE}'
+      MYSQL_USER: '$${DB_USERNAME}'
+      MYSQL_PASSWORD: '$${DB_PASSWORD}'
+    ports:
+      - "9002:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    networks:
+      tribes-app-network:
+        aliases:
+          - mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.0
+    container_name: tribes-dbadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "9004:80"
+    networks:
+      tribes-app-network:
+        aliases:
+          - phpmyadmin
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: tribes-smtp
+    ports:
+      - "8025:1025"
+      - "9005:8025"
+    networks:
+      tribes-app-network:
+        aliases:
+            - mailhog
+
+  soketi:
+    image: 'quay.io/soketi/soketi:latest-16-alpine'
+    container_name: tribes-realtime-messaging
+    environment:
+      SOKETI_DEBUG: '1'
+      SOKETI_METRICS_SERVER_PORT: '9601'
+      SOKETI_DEFAULT_APP_ID: '$${PUSHER_APP_ID}'
+      SOKETI_DEFAULT_APP_KEY: '$${PUSHER_APP_KEY}'
+      SOKETI_DEFAULT_APP_SECRET: '$${PUSHER_APP_SECRET}'
+    ports:
+      - '${SOKETI_PORT:-6001}:6001'
+      - '${SOKETI_METRICS_SERVER_PORT:-9601}:9601'
+    networks:
+      tribes-app-network:
+        aliases:
+            - soketi
