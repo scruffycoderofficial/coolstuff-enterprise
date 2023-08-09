@@ -65,7 +65,7 @@ Inside the container we need to run the following commands:
 
 ```cli
 ┌─[MacBook-Pro][~/devhouse/assessments/tribes-messenger]
-└──╼ composer install && php artisan migrate
+└──╼ composer install && php artisan migrate && php artisan db:seed
 ```
 
 ## Packaged Services ##
