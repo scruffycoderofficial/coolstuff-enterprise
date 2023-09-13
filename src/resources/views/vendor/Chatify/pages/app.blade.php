@@ -63,7 +63,7 @@
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    <a href="/"><i class="fas fa-home"></i></a>
+                    <a href="/home"><i class="fas fa-home"></i></a>
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                     <div class="avatar av-m" style="background-image: url('{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}');">
                     </div>

@@ -31,19 +31,19 @@ const setMessengerId = (id) => $("meta[name=id]").attr("content", id);
  *-------------------------------------------------------------
  */
 Pusher.logToConsole = chatify.pusher.debug;
+
+// @see https://github.com/munafio/chatify/issues/302
 const pusher = new Pusher(chatify.pusher.key, {
-    encrypted: chatify.pusher.options.encrypted,
-    cluster: chatify.pusher.options.cluster,
     wsHost: chatify.pusher.options.host,
     wsPort: chatify.pusher.options.port,
-    wssPort: chatify.pusher.options.port,
+    cluster: "",
     forceTLS: chatify.pusher.options.useTLS,
     authEndpoint: chatify.pusherAuthEndpoint,
-  auth: {
-    headers: {
-      "X-CSRF-TOKEN": csrfToken,
+    auth: {
+        headers: {
+            "X-CSRF-TOKEN": csrfToken,
+        },
     },
-  },
 });
 /**
  *-------------------------------------------------------------
