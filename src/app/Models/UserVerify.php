@@ -11,10 +11,25 @@
 
 namespace App\Models;
 
-use Chatify\Traits\UUID;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ChFavorite extends Model
+/**
+ * Class UserVerify.
+ */
+class UserVerify extends Model
 {
-    use UUID;
+    use HasFactory;
+
+    protected $table = 'users_verify';
+
+    protected $fillable = [
+        'user_id',
+        'token',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

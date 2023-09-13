@@ -1,16 +1,32 @@
 <?php
 
+/*
+ *     This file is part of the CoolStuff IT Solutions package.
+ *
+ *         (c) Luyanda Siko <sikoluyanda@gmail.com>
+ *
+ *     For the full copyright and license information, please view the LICENSE
+ *     file that was distributed with this source code.
+ */
+
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Mail\Message;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Mpociot\Teamwork\Traits\UserHasTeams;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use UserHasTeams;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +37,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_email_verified',
     ];
 
     /**
@@ -42,4 +59,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function sendEmailVerificationNotification()
+    {
+        $token = Str::random(64);
+
+        UserVerify::create([
+            'user_id' => $this->id,
+            'token' => $token,
+        ]);
+
+        Mail::send('emails.email-verification', ['token' => $token], function (Message $message) {
+            $message->to($this->email);
+            $message->subject('Email Verification Mail');
+        });
+    }
 }

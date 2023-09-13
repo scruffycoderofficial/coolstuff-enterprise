@@ -11,10 +11,15 @@
 
 namespace App\Models;
 
-use Chatify\Traits\UUID;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mpociot\Teamwork\TeamworkTeam;
 
-class ChFavorite extends Model
+class Team extends TeamworkTeam
 {
-    use UUID;
+    use HasFactory;
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'owner_id', 'description'];
 }
