@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *     This file is part of the CoolStuff IT Solutions package.
+ *
+ *         (c) Luyanda Siko <sikoluyanda@gmail.com>
+ *
+ *     For the full copyright and license information, please view the LICENSE
+ *     file that was distributed with this source code.
+ */
+
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -159,6 +168,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Barryvdh\Form\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -168,9 +179,10 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\StockListsServiceProvider::class,
 
-        /**
-         * Frontend Tools Service Providers...
+        /*
+         * Utils/Tools Service Providers...
          */
         App\Tools\Frontend\TailwindCssPresetServiceProvider::class,
     ])->toArray(),
@@ -188,6 +200,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Chatify' => Chatify\Facades\ChatifyMessenger::class,
+        'FormFactory' => Barryvdh\Form\Facade\FormFactory::class,
+        'FormRenderer' => Barryvdh\Form\Facade\FormRenderer::class,
     ])->toArray(),
 
 ];

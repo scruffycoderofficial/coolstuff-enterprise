@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *     This file is part of the CoolStuff IT Solutions package.
+ *
+ *         (c) Luyanda Siko <sikoluyanda@gmail.com>
+ *
+ *     For the full copyright and license information, please view the LICENSE
+ *     file that was distributed with this source code.
+ */
+
 return [
     /*
     |-------------------------------------
@@ -23,7 +32,7 @@ return [
     */
     'routes' => [
         'prefix' => env('CHATIFY_ROUTES_PREFIX', 'messenger'),
-        'middleware' => env('CHATIFY_ROUTES_MIDDLEWARE', ['web','auth']),
+        'middleware' => env('CHATIFY_ROUTES_MIDDLEWARE', ['web', 'auth']),
         'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'App\Http\Controllers\vendor\Chatify'),
     ],
     'api_routes' => [
@@ -73,7 +82,7 @@ return [
     'gravatar' => [
         'enabled' => true,
         'image_size' => 200,
-        'imageset' => 'identicon'
+        'imageset' => 'identicon',
     ],
 
     /*
@@ -84,8 +93,8 @@ return [
     'attachments' => [
         'folder' => 'attachments',
         'download_route_name' => 'attachments.download',
-        'allowed_images' => (array) ['png','jpg','jpeg','gif'],
-        'allowed_files' => (array) ['zip','rar','txt'],
+        'allowed_images' => (array) ['png', 'jpg', 'jpeg', 'gif'],
+        'allowed_files' => (array) ['zip', 'rar', 'txt'],
         'max_upload_size' => env('CHATIFY_MAX_FILE_SIZE', 150), // MB
     ],
 
@@ -105,6 +114,22 @@ return [
         '#FF9800',
         '#ff2522',
         '#9C27B0',
+        '#2c3e50',
+        '#1abc9c',
+        '#e74c3c',
+        '#01a9ac',
+        '#536dfe',
+        '#3498db',
+        '#3C5A99',
+        '#42C0FB',
+        '#EC4A89',
+        '#BF2131',
+        '#E0291D',
+        '#C73E2E',
+        '#AA7C62',
+        '#0057ff',
+        '#3380FF',
+        '#0077B5',
     ],
     /*
     |-------------------------------------
@@ -119,5 +144,5 @@ return [
         'enabled' => true,
         'public_path' => 'sounds/chatify',
         'new_message' => 'new-message-sound.mp3',
-    ]
+    ],
 ];
