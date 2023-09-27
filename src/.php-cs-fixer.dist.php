@@ -3,12 +3,24 @@
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
+$header = <<<TXT
+Copyright ©  2023 Luyanda Siko <sikoluyanda@gmail.com>
+
+License: See LICENSE file in root folder of the project.
+TXT;
+
+
 $rules = [
     'array_indentation' => true,
     'array_syntax' => ['syntax' => 'short'],
     'binary_operator_spaces' => [
         'default' => 'single_space',
         'operators' => ['=>' => null],
+    ],
+    'header_comment' => [
+        'header' => $header,
+        'location' => 'after_open',
+        'separate' => 'bottom',
     ],
     'blank_line_after_namespace' => true,
     'blank_line_after_opening_tag' => true,
@@ -100,7 +112,7 @@ $rules = [
     'normalize_index_brace' => true,
     'not_operator_with_successor_space' => true,
     'object_operator_without_whitespace' => true,
-    'ordered_imports' => ['sort_algorithm' => 'alpha'],
+    'ordered_imports' => ['sort_algorithm' => 'length', 'imports_order' => ['const', 'class', 'function']],
     'psr_autoloading' => true,
     'phpdoc_indent' => true,
     'phpdoc_inline_tag_normalizer' => true,
