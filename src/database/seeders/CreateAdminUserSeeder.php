@@ -25,7 +25,7 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::create(['name' => 'admin']);
+        $role = Role::findByName('admin');
 
         $permissions = Permission::pluck('id', 'id')->all();
 
@@ -33,13 +33,13 @@ class CreateAdminUserSeeder extends Seeder
 
         // Users to get the Admin ROLE automatically, if database is filled with seeders
         $sholaWilliams = User::create([
-            'name' => 'Shola Williams',
-            'password' => 'shola123',
-            'email' => 'shola.w@gmail.com',
+            'name' => 'Shiela McLachlan',
+            'password' => 'Shiela123',
+            'email' => 'shiela.w@gmail.com',
         ]);
 
         $luyandaSiko  = User::create([
-            'name' => 'Luyanda SIko',
+            'name' => 'Luyanda Siko',
             'password' => 'luyanda',
             'email' => 'sikoluyanda@gmail.com',
         ]);

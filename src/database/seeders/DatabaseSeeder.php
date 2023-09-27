@@ -41,5 +41,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'chrisd',
             'email' => 'chrisd@doeorg.com',
         ]);
+
+        $this->call(CreateAdminUserSeeder::class);
     }
 }
