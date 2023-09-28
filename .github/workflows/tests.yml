@@ -1,6 +1,9 @@
 name: CoolStuff Enteprise Application
 on:
   - push
+defaults:
+  run:
+    working-directory: ./src
 
 jobs:
   tests:
