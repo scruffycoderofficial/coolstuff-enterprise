@@ -31,7 +31,6 @@ class CreateAdminUserSeeder extends Seeder
 
         $role->syncPermissions($permissions);
 
-        // Users to get the Admin ROLE automatically, if database is filled with seeders
         $sholaWilliams = User::create([
             'name' => 'Shiela McLachlan',
             'password' => 'Shiela123',
@@ -44,7 +43,6 @@ class CreateAdminUserSeeder extends Seeder
             'email' => 'sikoluyanda@gmail.com',
         ]);
 
-        // Assign the role admin to given users
         $sholaWilliams->assignRole([$role->id]);
         $luyandaSiko->assignRole([$role->id]);
     }

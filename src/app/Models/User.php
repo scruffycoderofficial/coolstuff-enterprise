@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Mpociot\Teamwork\Traits\UserHasTeams;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -27,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory;
     use Notifiable;
     use UserHasTeams;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.

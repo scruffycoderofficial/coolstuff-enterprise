@@ -179,7 +179,6 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\StockListsServiceProvider::class,
 
         /*
          * Utils/Tools Service Providers...
