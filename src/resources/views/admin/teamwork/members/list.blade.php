@@ -3,7 +3,7 @@
 @section('content')
     <div class="pagetitle">
         <h1>Teams</h1>
-        {{ \Breadcrumbs::render('team_members', $team) }}
+        {{ \Breadcrumbs::render('team_members', $team->name) }}
     </div><!-- End Page Title -->
 
     <section class="section team-members-index">
@@ -11,19 +11,14 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="card">
-
-                        <div class="card-header">
-                            <h5 class="card-title"><i class="fa fa-pencil"></i>{{$team->name . ' Team'}}</h5>
-                            <!-- Trigger the modal with a button -->
-                            <div class="text-end">
-                                <button type="button" class="btn btn-primary btn-md  text-end" data-toggle="modal" data-target="#myModal">Invite to Team</button>
-                                <a href="{{route('teams.index')}}" class="btn btn-sm btn-outline-primary">
+                        <div class="card-body">
+                            <div class="text-end py-3">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Invite to Team</button>
+                                <a href="{{route('teams.index')}}" class="btn btn-outline-primary">
                                     <i class="fa fa-arrow-left"></i> My Teams
                                 </a>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="panel panel-default">
+                            <div class="panel panel-default my-5">
                                 <div class="panel-heading clearfix text-primary">Pending invitations</div>
                                 <div class="panel-body">
 

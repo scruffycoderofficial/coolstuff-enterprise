@@ -21,5 +21,5 @@ class Team extends TeamworkTeam
     /**
      * @var array
      */
-    protected $fillable = ['name', 'owner_id', 'description'];
+    protected $fillable = ['name', 'owner_id', 'description', 'team_manager'];
 }

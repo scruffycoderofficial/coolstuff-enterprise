@@ -11,18 +11,18 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="card">
-                        <h5 class="card-title"><i class="fa fa-pencil"></i>Add New</h5>
-                        <div class="card-header text-end">
-                            <a href="{{route('teams.create')}}" class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-pencil"></i> Create new
-                            </a>
-                        </div>
                         <div class="card-body">
-                            <table class="table table-striped">
+                            <div class="text-end py-3">
+                                <a href="{{route('teams.create')}}" class="btn btn-outline-primary">
+                                    <i class="fa fa-pencil"></i> Create new
+                                </a>
+                            </div>
+                            <table class="table table-striped my-5">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Status</th>
+                                    <th class="text-primary">Name</th>
+                                    <th class="text-primary">Status</th>
+                                    <th class="text-primary">Manager</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -37,6 +37,7 @@
                                                 <span class="label label-primary">Member</span>
                                             @endif
                                         </td>
+                                        <td>{{ $team->team_manager }}</td>
                                         <td>
                                             @if(is_null(auth()->user()->currentTeam) || auth()->user()->currentTeam->getKey() !== $team->getKey())
                                                 <a href="{{route('teams.switch', $team)}}" class="btn btn-sm btn-default">

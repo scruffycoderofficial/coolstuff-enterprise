@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><i class="fa fa-pencil"></i>Edit {{ $team->name }}</h5>
 
-                            <form class="row g-3"  method="post" action="{{route('teams.update', $team)}}">
+                            <form class="row g-3 py-3"  method="post" action="{{route('teams.update', $team)}}">
                                 <input type="hidden" name="_method" value="PUT" />
                                 {!! csrf_field() !!}
 

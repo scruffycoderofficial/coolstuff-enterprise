@@ -11,11 +11,17 @@
 
 namespace App\Http\Controllers\Admin\Teamwork;
 
+use App\Mail\Teams\OutBoundInvite;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Mpociot\Teamwork\Exceptions\UserNotInTeamException;
+use Mpociot\Teamwork\Facades\Teamwork;
+use Mpociot\Teamwork\TeamInvite;
 
 /**
  * Class TeamController.
@@ -45,7 +51,9 @@ class TeamController extends Controller
      */
     public function create(): View
     {
-        return view('admin.teamwork.create');
+        return view('admin.teamwork.create', [
+            'users' => User::all(),
+        ]);
     }
 
     /**
@@ -60,15 +68,54 @@ class TeamController extends Controller
             'name' => 'required|string',
             'description' => 'string',
             'logo_file' => 'mimes:jpeg,jpg,png|max:5120',
+            'team_manager' => 'string',
         ]);
 
-        $teamModel = config('teamwork.team_model');
+        $logoFilePath = $request->file('logo_file')->store('images/teams/logos', 'public');
 
-        $team = $teamModel::create([
+        $modelClass = config('teamwork.team_model');
+
+        $teamManager = User::whereName($request->team_manager)->first();
+
+        if (!$teamManager) {
+            abort(RedirectResponse::HTTP_UNPROCESSABLE_ENTITY, 'Team Manager does not exist!');
+        }
+
+        $team = $modelClass::create([
             'name' => $request->name,
             'description' => $request->description,
             'owner_id' => $request->user()->getKey(),
+            'logo' => $logoFilePath,
+            'team_manager' => $request->team_manager,
         ]);
+
+        $request->whenHas('team_invitees', function () use($request, $team) {
+            foreach ($request->team_invitees as $id => $email) {
+                $invitee = User::whereEmail($email)->first();
+                if ($invitee) {
+                    if( !Teamwork::hasPendingInvite( $invitee->email, $team) ) {
+                        Teamwork::inviteToTeam( $invitee->email, $team, function( $invite ) {
+                            $invite->invite_type = 'membership';
+                            $invite->save();
+                        });
+                    }
+                } else {
+                    $teamInvite = new TeamInvite();
+
+                    $teamInvite->user_id = $request->user()->id;
+                    $teamInvite->team_id = $team->id;
+                    $teamInvite->type = 'invite';
+                    $teamInvite->accept_token = md5(uniqid(microtime()));
+                    $teamInvite->deny_token = md5(uniqid(microtime()));
+                    $teamInvite->email = $email[0];
+
+                    $teamInvite->save();
+
+                    Mail::to($team->owner->email)
+                        ->send(new OutBoundInvite($team, $email[0]));
+                }
+            }
+        });
 
         $request->user()->attachTeam($team);
 
