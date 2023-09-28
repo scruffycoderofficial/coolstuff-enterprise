@@ -38,12 +38,13 @@ jobs:
       matrix:
         operating-system: [ubuntu-latest]
         php-versions: [ '8.0','7.4' ]
-        dependency-stability: [ prefer-stable ]
 
-    name: P${{ matrix.php-versions }} - L${{ matrix.laravel }} - ${{ matrix.dependency-stability }} - ${{ matrix.operating-system}}
+    name: Php${{ matrix.php-versions }} - Lvl${{ matrix.laravel }} - ${{ matrix.operating-system}}
 
     steps:
       - uses: actions/checkout@v2
+      - name: Show dir
+          run: pwd
       - name: Install PHP versions
         uses: shivammathur/setup-php@v2
         with:
