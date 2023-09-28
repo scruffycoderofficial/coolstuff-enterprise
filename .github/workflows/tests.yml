@@ -1,7 +1,6 @@
 name: Indivudual Commit Tests (PHP)
-
-on: [push]
-
+on:
+  - push
 strategy:
   matrix:
     php:
@@ -9,56 +8,48 @@ strategy:
       - "8.0"
       - "8.1"
     dependencies:
-      - "lowest"
-      - "highest"
+      - lowest
+      - highest
     include:
       - php-version: "8.2"
-        composer-options: "--ignore-platform-reqs"
-
+        composer-options: --ignore-platform-reqs
 jobs:
   tests:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v3"
-      - uses: "shivammathur/setup-php@v2"
-          with:
-            php-version: "${{ matrix.php }}"
-      - uses: "ramsey/composer-install@v2"
-          with:
-            dependency-versions: "${{ matrix.dependencies }}"
-            composer-options: "${{ matrix.composer-options }}"
-
+      - uses: actions/checkout@v3
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+      - uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+          composer-options: ${{ matrix.composer-options }}
       - name: Cache composer dependencies
         uses: actions/cache@v2
         with:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
-
       - name: Run composer install
         run: composer install -n --prefer-dist
         env:
           APP_ENV: testing
-
       - name: Prepare Laravel Application
         run: |
           cp .env.example .env
           php artisan key:generate
-
       - name: Cache yarn dependencies
         uses: actions/cache@v2
         with:
           path: node_modules
           key: yarn-${{ hashFiles('yarn.lock') }}
-
       - name: Run yarn
         run: yarn && yarn dev
-
       - name: Run tests
         run: ./vendor/bin/phpunit
         env:
           APP_ENV: testing
-
       - name: Upload artifacts
         uses: actions/upload-artifact@master
         if: failure()
