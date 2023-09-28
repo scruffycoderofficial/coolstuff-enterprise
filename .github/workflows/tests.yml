@@ -3,7 +3,7 @@ on:
   - push
 defaults:
   run:
-    working-directory: ./src
+    working-directory: ../../src
 
 jobs:
   tests:
