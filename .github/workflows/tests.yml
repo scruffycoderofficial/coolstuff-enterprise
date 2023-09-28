@@ -33,7 +33,7 @@ jobs:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
       - name: Run composer install
-        run: composer install -n --prefer-dist
+        run: composer config --global cache-dir
         env:
           APP_ENV: testing
       - name: Prepare Laravel Application
