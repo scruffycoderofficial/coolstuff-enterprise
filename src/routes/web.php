@@ -59,7 +59,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('create', [App\Http\Controllers\Admin\Teamwork\TeamController::class, 'create'])
             ->name('teams.create');
 
-        Route::post('teams', [App\Http\Controllers\Admin\Teamwork\TeamController::class, 'store'])
+        Route::any( 'teams', [App\Http\Controllers\Admin\Teamwork\TeamController::class, 'store'])
             ->name('teams.store');
 
         Route::get('edit/{id}', [App\Http\Controllers\Admin\Teamwork\TeamController::class, 'edit'])
