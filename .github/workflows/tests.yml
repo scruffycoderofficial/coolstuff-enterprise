@@ -1,22 +1,23 @@
-name: Indivudual Commit Tests (PHP)
+name: CoolStuff Enteprise Application
 on:
   - push
-strategy:
-  matrix:
-    php:
-      - "7.4"
-      - "8.0"
-      - "8.1"
-    dependencies:
-      - lowest
-      - highest
-    include:
-      - php-version: "8.2"
-        composer-options: --ignore-platform-reqs
+
 jobs:
   tests:
     name: Run tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+        dependencies:
+          - lowest
+          - highest
+        include:
+          - php-version: "8.2"
+            composer-options: --ignore-platform-reqs
     steps:
       - uses: actions/checkout@v3
       - uses: shivammathur/setup-php@v2
