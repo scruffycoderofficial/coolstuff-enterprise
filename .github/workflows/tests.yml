@@ -9,6 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: '8.1'
+
       - name: Cache composer dependencies
         uses: actions/cache@v1
         with:
