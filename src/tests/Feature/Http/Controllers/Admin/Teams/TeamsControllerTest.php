@@ -25,6 +25,45 @@ class TeamsControllerTest extends TestCase
         $this->setupTeamActor();
     }
 
+    public function test_it_can_show_message_when_there_are_no_teams_available()
+    {
+        $this->actingAs($this->actor)
+            ->get(route('teams.index'))
+            ->assertSee('There currently are no Teams available. To add a new Team click on the Create Team call to action on the right-hand corner.');
+
+        $this->assertDatabaseCount('teams', 0);
+    }
+
+    public function test_it_can_can_show_teams_when_available()
+    {
+        $postData = [
+            'name' => $this->teamName(),
+            'description' => $this->teamDescription(),
+            'owner_id' => $this->actor->id,
+            'logo_file' => $this->teamLogiFile(),
+            'team_manager' => $this->teamManager(),
+        ];
+
+        $this->actingAs($this->actor)
+            ->post(route('teams.store'), $postData);
+
+        $this->actingAs($this->actor)
+            ->get(route('teams.index'))
+            ->assertSee($postData['name']);
+
+        $this->assertDatabaseCount('teams', 1);
+    }
+
+    public function test_it_can_view_team_create_form()
+    {
+        $this->actingAs($this->actor)
+            ->get(route('teams.create'))
+            ->assertSee('Your Team Name')
+            ->assertSee('Description')
+            ->assertSee('Upload Logo')
+            ->assertSee('Team Manager');
+    }
+
     public function test_it_can_create_team()
     {
         $this->actingAs($this->actor)
