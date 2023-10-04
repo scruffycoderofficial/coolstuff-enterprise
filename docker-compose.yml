@@ -40,6 +40,7 @@ services:
       XDEBUG_CONFIG:
         client_host=host.docker.internal
         start_with_request=yes
+      PHP_IDE_CONFIG: docker
     volumes:
       - ./src:/var/www
       - .docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
