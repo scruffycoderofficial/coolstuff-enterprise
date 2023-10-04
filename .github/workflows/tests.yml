@@ -20,8 +20,8 @@ jobs:
 
     # Docs: https://docs.github.com/en/actions/using-containerized-services
     services:
-      mariadb:
-        image: mariadb:latest
+      mysql:
+        image: mariadb
         ports:
           - 3306
         env:
