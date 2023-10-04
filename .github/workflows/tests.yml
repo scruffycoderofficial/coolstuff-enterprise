@@ -60,12 +60,12 @@ jobs:
       #  run: sudo systemctl start mysql.service
 
       - name: Verify MariaDB connection
-          env:
-            PORT: ${{ job.services.mariadb.ports[3306] }}
-          run: |
-            while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
-              sleep 1
-            done
+        env:
+          PORT: ${{ job.services.mariadb.ports[3306] }}
+        run: |
+          while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+            sleep 1
+          done
 
       - name: Setting up DB
         run: |
