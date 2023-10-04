@@ -15,7 +15,6 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "mpociot/teamwork": "^8.1",
-        "munafio/chatify": "^1.6",
         "pusher/pusher-php-server": "^7.2",
         "smashed-egg/laravel-route-annotation": "^0.2.0",
         "spatie/laravel-permission": "^5.10",

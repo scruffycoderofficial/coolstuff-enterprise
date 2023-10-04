@@ -198,7 +198,6 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        /**'Chatify' => Chatify\Facades\ChatifyMessenger::class,*/
         'FormFactory' => Barryvdh\Form\Facade\FormFactory::class,
         'FormRenderer' => Barryvdh\Form\Facade\FormRenderer::class,
     ])->toArray(),
