@@ -83,10 +83,10 @@ jobs:
           key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
 
       - name: Install Composer dependencies
-          run: composer install --no-progress --prefer-dist --optimize-autoloader
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Copy .env
-          run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Generate key
         run: php artisan key:generate
@@ -102,7 +102,6 @@ jobs:
           DB_PORT: 33306
           DB_USER: testing
           DB_PASSWORD: t3st!n6
-
         run: php artisan migrate
 
       - name: Show dir
