@@ -1,5 +1,3 @@
-# GithHub Actions Workflow generated with Ghygen
-# Original configuration: https://ghygen.hi-folks.dev?code=798b226f1ea8d173fd422a8ca41a3d6a
 name: CoolStuff Enteprise QA Pipeline
 on:
   pull_request:
@@ -22,6 +20,7 @@ jobs:
       CACHE_DRIVER: redis
       QUEUE_CONNECTION: redis
       SESSION_DRIVER: redis
+
     # Service container Mysql mysql
     services:
       redis:
@@ -57,30 +56,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
 
       - name: Install PHP versions
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - uses: actions/cache@v3
-        id: actions-cache
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
-      - name: Cache PHP dependencies
-        uses: actions/cache@v3
-        id: vendor-cache
-        with:
-          path: vendor
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
 
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
@@ -104,7 +86,7 @@ jobs:
           DB_PASSWORD: t3st!n6
         run: php artisan migrate
 
-      - name: Show dir
+      - name: Show current dir
         run: pwd
 
       - name: PHP Version
