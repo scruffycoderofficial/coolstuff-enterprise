@@ -4,7 +4,7 @@ ENV USER=www
 ENV GROUP=www
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install libldap2-dev -y \
     git \
     curl \
     libpng-dev \
@@ -15,6 +15,10 @@ RUN apt-get update && apt-get install -y \
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
+
+RUN docker-php-ext-install ldap
 
 # Set timezone
 RUN rm /etc/localtime \
