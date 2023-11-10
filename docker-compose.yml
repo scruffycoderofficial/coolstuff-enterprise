@@ -122,3 +122,20 @@ services:
       coolstuff-enterprise-network:
         aliases:
             - soketi
+
+  mysql_testing:
+    image: mysql:5.7
+    container_name: tribes-testing-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 'testing'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_RANDOM_ROOT_PASSWORD: 0
+      MYSQL_DATABASE: 'coolstuff_test_db'
+      MYSQL_USER: 'testuser'
+      MYSQL_PASSWORD: 't3st!n6'
+    tmpfs:
+      - /var/lib/mysql
+    networks:
+      tribes-app-network:
+        aliases:
+          - mysql_testing

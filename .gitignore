@@ -1,0 +1,6 @@
+.idea/
+.idea/modules.xml
+.idea/tribes-messenger.iml
+.idea/vcs.xml
+src/public/coverage/
+github_action_sample.yaml
