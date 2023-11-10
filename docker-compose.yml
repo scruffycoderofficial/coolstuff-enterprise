@@ -200,6 +200,7 @@ services:
     tmpfs:
       - /var/lib/mysql
     networks:
+      coolstuff-enterprise-network:
       tribes-app-network:
         aliases:
           - mysql_testing

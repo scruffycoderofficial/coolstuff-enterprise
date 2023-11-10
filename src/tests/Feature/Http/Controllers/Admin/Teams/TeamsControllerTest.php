@@ -54,7 +54,7 @@ class TeamsControllerTest extends TestCase
         $this->assertDatabaseCount('teams', 1);
     }
 
-    public function test_it_can_view_team_create_form()
+    public function test_it_can_see_team_create_form()
     {
         $this->actingAs($this->actor)
             ->get(route('teams.create'))

@@ -42,17 +42,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-
-<<<<<<< Updated upstream
 window.Pusher = (pusher_js__WEBPACK_IMPORTED_MODULE_2___default());
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
-=======
 
 var pusher = new (pusher_js__WEBPACK_IMPORTED_MODULE_3___default())("app-key", {
   'cluster': "mt1"
 });
+
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
->>>>>>> Stashed changes
   broadcaster: 'pusher',
   key: "app-key",
   wsHost: "127.0.0.1",
@@ -3836,16 +3833,30 @@ var Echo = /*#__PURE__*/function () {
 
 /***/ }),
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+/***/ "./resources/css/app.css":
+/*!*******************************!*\
+  !*** ./resources/css/app.css ***!
+  \*******************************/
+=======
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
   \*********************************/
+>>>>>>> f3fc82471b5799beebe38a9a7112a47c88a5969d
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+/***/ "./resources/sass/app.scss":
+/*!*********************************!*\
+  !*** ./resources/sass/app.scss ***!
+  \*********************************/
+/***/ (() => {
 
+throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/css-loader/dist/cjs.js):\nError: Can't resolve '~nprogress/nprogress.css' in '/Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/resources/sass'\n    at finishWithoutResolve (/Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/enhanced-resolve/lib/Resolver.js:369:18)\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/enhanced-resolve/lib/Resolver.js:461:15\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/enhanced-resolve/lib/Resolver.js:519:5\n    at eval (eval at create (/Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/enhanced-resolve/lib/Resolver.js:519:5\n    at eval (eval at create (/Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:89:43\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/enhanced-resolve/lib/Resolver.js:519:5\n    at eval (eval at create (/Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/enhanced-resolve/lib/Resolver.js:519:5\n    at processResult (/Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/webpack/lib/NormalModule.js:764:19)\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/webpack/lib/NormalModule.js:866:5\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/loader-runner/lib/LoaderRunner.js:400:11\n    at /Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/loader-runner/lib/LoaderRunner.js:252:18\n    at context.callback (/Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/loader-runner/lib/LoaderRunner.js:124:13)\n    at Object.loader (/Users/luyandasiko/devhouse/support/coolstuff-enterprise/src/node_modules/css-loader/dist/index.js:155:5)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)");
 
 /***/ }),
 
@@ -10657,7 +10668,7 @@ function buildURL(url, params, options) {
   if (!params) {
     return url;
   }
-  
+
   const _encode = options && options.encode || encode;
 
   const serializeFn = options && options.serialize;
@@ -12522,7 +12533,7 @@ const isThenable = (thing) =>
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -12536,50 +12547,15 @@ const isThenable = (thing) =>
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	(() => {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var [chunkIds, fn, priority] = deferred[i];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -12591,7 +12567,7 @@ const isThenable = (thing) =>
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -12603,7 +12579,7 @@ const isThenable = (thing) =>
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -12615,12 +12591,12 @@ const isThenable = (thing) =>
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -12631,69 +12607,18 @@ const isThenable = (thing) =>
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"/js/app": 0,
-/******/ 			"css/app": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+/******/ 	__webpack_require__("./resources/js/app.js");
+/******/ 	// This entry module doesn't tell about it's top-level declarations so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./resources/sass/app.scss");
+/******/
 /******/ })()
 ;
