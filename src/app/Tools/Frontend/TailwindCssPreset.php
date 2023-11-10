@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *     This file is part of the CoolStuff IT Solutions package.
+ *
+ *         (c) Luyanda Siko <sikoluyanda@gmail.com>
+ *
+ *     For the full copyright and license information, please view the LICENSE
+ *     file that was distributed with this source code.
+ */
+
 namespace App\Tools\Frontend;
 
 use Illuminate\Container\Container;
@@ -10,9 +19,7 @@ use Laravel\Ui\Presets\Preset;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * Class TailwindCssPreset
- *
- * @package App\Tools\Frontend
+ * Class TailwindCssPreset.
  */
 class TailwindCssPreset extends Preset
 {
@@ -33,7 +40,7 @@ class TailwindCssPreset extends Preset
 
     protected static function updatePackageArray(array $packages)
     {
-        /**
+        /*
          * @TODO Handle this array differently to allow for dependencies and
          *       devDependencies correct entry merging with package.json.
          *
@@ -56,7 +63,7 @@ class TailwindCssPreset extends Preset
 
     protected static function updateStyles()
     {
-        tap(new Filesystem, function ($filesystem) {
+        tap(new Filesystem(), function ($filesystem) {
             $filesystem->deleteDirectory(resource_path('sass'));
             $filesystem->delete(public_path('js/app.js'));
             $filesystem->delete(public_path('css/app.css'));
@@ -66,21 +73,21 @@ class TailwindCssPreset extends Preset
             }
         });
 
-        copy(static::tailwindStubsRootPath() .'/stubs/resources/css/app.css', resource_path('css/app.css'));
+        copy(static::tailwindStubsRootPath().'/stubs/resources/css/app.css', resource_path('css/app.css'));
     }
 
     protected static function updateBootstrapping()
     {
-        copy(static::tailwindStubsRootPath() .'/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(static::tailwindStubsRootPath().'/tailwind.config.js', base_path('tailwind.config.js'));
 
-        copy(static::tailwindStubsRootPath() .'/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(static::tailwindStubsRootPath().'/webpack.mix.js', base_path('webpack.mix.js'));
     }
 
     protected static function updateWelcomePage()
     {
-        (new Filesystem)->delete(resource_path('views/welcome.blade.php'));
+        (new Filesystem())->delete(resource_path('views/welcome.blade.php'));
 
-        copy(static::tailwindStubsRootPath() .'/stubs/resources/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
+        copy(static::tailwindStubsRootPath().'/stubs/resources/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
     }
 
     protected static function scaffoldController()
@@ -89,7 +96,7 @@ class TailwindCssPreset extends Preset
             mkdir($directory, 0755, true);
         }
 
-        $filesystem = new Filesystem;
+        $filesystem = new Filesystem();
 
         collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/Auth')))
             ->each(function (SplFileInfo $file) use ($filesystem) {
@@ -110,8 +117,8 @@ class TailwindCssPreset extends Preset
             FILE_APPEND
         );
 
-        tap(new Filesystem, function ($filesystem) {
-            $filesystem->copyDirectory(static::tailwindStubsRootPath() .'/stubs/resources/views', resource_path('views'));
+        tap(new Filesystem(), function ($filesystem) {
+            $filesystem->copyDirectory(static::tailwindStubsRootPath().'/stubs/resources/views', resource_path('views'));
 
             collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/migrations')))
                 ->each(function (SplFileInfo $file) use ($filesystem) {
@@ -128,12 +135,12 @@ class TailwindCssPreset extends Preset
         return str_replace(
             '{{namespace}}',
             Container::getInstance()->getNamespace(),
-            file_get_contents(static::tailwindStubsRootPath() .'/stubs/controllers/HomeController.stub')
+            file_get_contents(static::tailwindStubsRootPath().'/stubs/controllers/HomeController.stub')
         );
     }
 
     private static function tailwindStubsRootPath()
     {
-        return __DIR__ . '/../../Resources/tailwind';
+        return __DIR__.'/../../Resources/tailwind';
     }
 }

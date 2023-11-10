@@ -1,10 +1,19 @@
 <?php
 
+/*
+ *     This file is part of the CoolStuff IT Solutions package.
+ *
+ *         (c) Luyanda Siko <sikoluyanda@gmail.com>
+ *
+ *     For the full copyright and license information, please view the LICENSE
+ *     file that was distributed with this source code.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -60,7 +69,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return User
      */
     protected function create(array $data)
     {

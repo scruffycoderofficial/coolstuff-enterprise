@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *     This file is part of the CoolStuff IT Solutions package.
+ *
+ *         (c) Luyanda Siko <sikoluyanda@gmail.com>
+ *
+ *     For the full copyright and license information, please view the LICENSE
+ *     file that was distributed with this source code.
+ */
+
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -64,5 +73,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'teamowner' => \Mpociot\Teamwork\Middleware\TeamOwner::class,
+        'verify_email' => \App\Http\Middleware\VerifyEmail::class,
     ];
 }

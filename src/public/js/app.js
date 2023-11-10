@@ -44,17 +44,32 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Pusher = (pusher_js__WEBPACK_IMPORTED_MODULE_2___default());
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
+
+var pusher = new (pusher_js__WEBPACK_IMPORTED_MODULE_3___default())("app-key", {
+  'cluster': "mt1"
+});
+
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   broadcaster: 'pusher',
   key: "app-key",
   wsHost: "127.0.0.1",
   wsPort: "6001",
   wssPort: "6001",
+<<<<<<< Updated upstream
   authEndpoint: "/broadcasting/auth",
   forceTLS: false,
   encrypted: true,
   disableStats: true,
   cluster: "mt1",
   enabledTransports: ['ws', 'wss']
+=======
+  authEndpoint: "/messenger/auth",
+  forceTLS: false,
+  encrypted: true,
+  disableStats: true,
+  enabledTransports: ['ws', 'wss'],
+  client: pusher
+>>>>>>> Stashed changes
 });
 
 /***/ }),
@@ -3818,11 +3833,18 @@ var Echo = /*#__PURE__*/function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
   \*******************************/
+=======
+/***/ "./resources/sass/app.scss":
+/*!*********************************!*\
+  !*** ./resources/sass/app.scss ***!
+  \*********************************/
+>>>>>>> f3fc82471b5799beebe38a9a7112a47c88a5969d
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -12592,7 +12614,7 @@ const isThenable = (thing) =>
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	__webpack_require__("./resources/js/app.js");
 /******/ 	// This entry module doesn't tell about it's top-level declarations so it can't be inlined

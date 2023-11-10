@@ -1,14 +1,21 @@
 <?php
 
+/*
+ *     This file is part of the CoolStuff IT Solutions package.
+ *
+ *         (c) Luyanda Siko <sikoluyanda@gmail.com>
+ *
+ *     For the full copyright and license information, please view the LICENSE
+ *     file that was distributed with this source code.
+ */
+
 namespace App\Tools\Frontend;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Ui\UiCommand;
 
 /**
- * Class TailwindCssPresetServiceProvider
- *
- * @package App\Tools\Frontend
+ * Class TailwindCssPresetServiceProvider.
  */
 class TailwindCssPresetServiceProvider extends ServiceProvider
 {
