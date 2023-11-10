@@ -1,8 +1,8 @@
 version: '3.8'
 
 networks:
-  tribes-app-network:
-    name: tribes-app-network
+  coolstuff-enterprise-network:
+    name: coolstuff-enterprise-network
     driver: bridge
 
 volumes:
@@ -14,9 +14,23 @@ volumes:
       device: '${HOME}/server/mysql/data'
 
 services:
-  nginx:
+  idp:
+    image: kenchan0130/simplesamlphp
+    container_name: coolstuff-idp-service-provider
+    environment:
+      SIMPLESAMLPHP_SP_ENTITY_ID: http://app.example.com
+      SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: http://localhost/simplesaml/module.php/saml/sp/saml2-acs.php/test-sp
+      SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SERVICE: http://localhost/simplesaml/module.php/saml/sp/saml2-logout.php/test-sp
+    ports:
+      - 9002:8080
+    networks:
+      coolstuff-enterprise-network:
+        aliases:
+          - idp_service_provider
+
+  admin_backend:
     image: nginx:1.21.6-alpine
-    container_name: tribes-nginx
+    container_name: coolstuff-admin-nginx
     restart: unless-stopped
     ports:
       - "9001:80"
@@ -24,15 +38,15 @@ services:
       - ./src:/var/www
       - .docker/nginx:/etc/nginx/conf.d
     networks:
-      tribes-app-network:
+      coolstuff-enterprise-network:
         aliases:
-          - nginx
+          - admin_backend
 
-  app:
+  admin:
     build:
       context: .docker/php
       dockerfile: dockerfile
-    container_name: tribes-app
+    container_name: coolstuff-admin
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
@@ -45,30 +59,30 @@ services:
       - ./src:/var/www
       - .docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
-      tribes-app-network:
+      coolstuff-enterprise-network:
         aliases:
-          - app
+          - admin
 
   mysql:
     image: mysql:8.0
-    container_name: tribes-rdbms
+    container_name: coolstuff-admin-rdbms
     environment:
       MYSQL_ROOT_PASSWORD: '$${MYSQL_ROOT_PASSWORD}'
       MYSQL_DATABASE: '$${DB_DATABASE}'
       MYSQL_USER: '$${DB_USERNAME}'
       MYSQL_PASSWORD: '$${DB_PASSWORD}'
     ports:
-      - "9002:3306"
+      - "9006:3306"
     volumes:
       - mysqldata:/var/lib/mysql
     networks:
-      tribes-app-network:
+      coolstuff-enterprise-network:
         aliases:
-          - mysql
+          - admin_mysql
 
   phpmyadmin:
     image: phpmyadmin:5.2.0
-    container_name: tribes-dbadmin
+    container_name: coolstuff-rdbms-admin
     links:
       - mysql
     environment:
@@ -77,24 +91,24 @@ services:
     ports:
       - "9004:80"
     networks:
-      tribes-app-network:
+      coolstuff-enterprise-network:
         aliases:
-          - phpmyadmin
+          - db-admin
 
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: tribes-smtp
+    container_name: coolstuff-smtp
     ports:
       - "8025:1025"
       - "9005:8025"
     networks:
-      tribes-app-network:
+      coolstuff-enterprise-network:
         aliases:
             - mailhog
 
   soketi:
     image: 'quay.io/soketi/soketi:latest-16-alpine'
-    container_name: tribes-realtime-messaging
+    container_name: coolstuff-broadcaster
     environment:
       SOKETI_DEBUG: '1'
       SOKETI_METRICS_SERVER_PORT: '9601'
@@ -105,7 +119,7 @@ services:
       - '${SOKETI_PORT:-6001}:6001'
       - '${SOKETI_METRICS_SERVER_PORT:-9601}:9601'
     networks:
-      tribes-app-network:
+      coolstuff-enterprise-network:
         aliases:
             - soketi
 
