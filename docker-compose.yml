@@ -77,7 +77,7 @@ services:
       coolstuff-enterprise-network:
         aliases:
           - phpldapadmin
-
+  
   idp:
     image: kenchan0130/simplesamlphp
     container_name: coolstuff-idp-service-provider
