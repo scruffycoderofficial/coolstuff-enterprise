@@ -16,14 +16,19 @@ RUN apt-get update && apt-get install -y \
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Set timezone
+RUN rm /etc/localtime \
+    && ln -s /usr/share/zoneinfo/Africa/Harare /etc/localtime \
+    && "date"
+
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install Postgre PDO
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
-
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+RUN pecl install xdebug-3.3.0alpha2 \
+    && docker-php-ext-enable xdebug
 
 # Setup working directory
 WORKDIR /var/www/
