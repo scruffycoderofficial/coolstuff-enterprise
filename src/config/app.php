@@ -201,6 +201,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'FormFactory' => Barryvdh\Form\Facade\FormFactory::class,
         'FormRenderer' => Barryvdh\Form\Facade\FormRenderer::class,
+
+        'LdapOnline' => App\Facades\Ldap\Ldap::class,
     ])->toArray(),
 
 ];
