@@ -19,6 +19,7 @@
         "smashed-egg/laravel-route-annotation": "^0.2.0",
         "spatie/laravel-permission": "^5.10",
         "spatie/laravel-welcome-notification": "^2.3",
+        "symfony/ldap": "^6.3",
         "symfony/serializer": "^6.3"
     },
     "require-dev": {
